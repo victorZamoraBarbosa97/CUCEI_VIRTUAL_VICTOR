@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Document</title>
+  <link rel="stylesheet" href="resources/css/style-chat.css">
+
+  <script>
+    var server = '<%= room %>'
+    var nombre = '<%= name %>'
+    console.log(server + '  '+  nombre);
+  </script>
+
+</head>
+
+<body>
+  <div class="centered-form">
+    <div class="centered-form__form">
+      <form action="/select-room">
+        <div class="form-field">
+          <h3 style="color: black;">Unirse a Sala</h3>
+        </div>
+        <div class="form-field" style="display: none;">
+          <input type="text" name="name" autofocus id="name_user">
+          <script>
+              document.getElementById('name_user').value='<%= name %>';
+          </script>
+        </div>
+        <div class="form-field">
+          <label for="room" style="color: black;">Nombre de la sala</label>
+          <input type="text" name="room" placeholder="Sala" style="box-sizing: border-box;">
+        </div>
+        <div class="form-field">
+          <button>UNIRSE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

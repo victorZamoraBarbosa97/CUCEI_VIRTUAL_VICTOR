@@ -1,0 +1,8 @@
+npm install  bcryptjs, dotenv, ejs, express, express-session, express-socket.io-session, mysql, socket.io
+
+
+info ---
+Version con el minimapa implementado, landing , login y register page , multijugador funcionando, mapa en version beta
+implementacion de chat global terminado.
+
+

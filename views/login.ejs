@@ -1,0 +1,86 @@
+<!--Login y register page -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login CUCEI VIRTUAL</title>
+    <link rel="stylesheet" href="resources/css/estilos_login.css">
+
+</head>
+<body>
+
+    <main>
+        <!--Caja trasera -->
+        <div class="contenedor__todo">
+            <div class="caja__trasera">
+                <div class="caja__trasera-login">
+                    <h3>¿Ya tienes una cuenta?</h3>
+                    <p>Inicia Sesión para entrar en la página</p>
+                    <button id="btn__iniciar-sesion">Iniciar Sesión</button>
+                </div>
+                
+                <div class="caja__trasera-register">
+                    <h3>¿Aún no tienes una cuenta?</h3>
+                    <p>Regístrarte para que puedas iniciar sesión</p>
+                    <button id="btn__registrarse">Registrate</button>
+                </div>
+            </div>
+
+            <!-- FORMULARIO DE LOGIN Y DE REGISTRO-->
+            <div class="contenedor__login-register">
+                <!--Login-->
+                <!-- PENDIENTE CAMBIAR ACTION DEL FORMMULARIO -->
+                <form action="/auth" method = "POST" class="formulario__login"> 
+                    <h2>Iniciar Sesión</h2>
+                    <input type="text" placeholder="Correo electronico" name = "correo" >
+                    <input type="password" placeholder="Contraseña" name = "contrasena" >
+                    <button>Entrar</button>
+                </form>
+                <!--Registro-->
+                <!-- PENDIENTE CAMBIAR ACTION DEL FORMMULARIO -->
+                <form action ="/Registro" method= 'POST' class="formulario__registrer">
+                    <h2>Registrarse</h2>
+                    <input type="text" placeholder="Nombre Completo" name="nombre_completo" required>
+                    <input type="text" placeholder="Codigo de alumno" name="codigo" required>
+                    <input type="text" placeholder="Correo electronico" name="correo" required>
+                    <input type="text" placeholder="Usuario" name="usuario" required>
+                    <input type="password" placeholder="Contraseña" name="contrasena" required>
+                    <div class="dropdown">
+                        <div class="select" style="background-color: #F2F2F2; color: #474747; size: 13px;">
+                          <span>Seleccionar un Rol</span>
+                          <i class="fa fa-chevron-left"></i>
+                        </div>
+                        <input type="hidden" name="rol">
+                        <ul class="dropdown-menu">
+                          <li id="estudiante">Estudiante</li>
+                          <li id="maestro">Maestro</li>
+                        </ul>
+                    </div>
+                    <button>Registrarse</button>
+                </form>
+
+            </div>
+        </div>
+    </main>
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>  
+    <% if (typeof alert != "undefined")  { %>
+        <script>
+        Swal.fire({
+          title:'<%= alertTitle %>',
+          text:'<%= alertMessage %>',
+          icon:'<%= alertIcon %>',
+          showConfirmButton: '<%= showConfirmButton %>',
+          timer: '<%= timer %>'
+        }).then(()=>{
+          window.location='/<%= ruta %>'
+        })
+        </script>
+       <% } %>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="resources/js/scriptLogin.js"></script>
+
+</body>
+</html>

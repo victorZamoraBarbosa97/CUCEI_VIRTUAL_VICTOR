@@ -1,0 +1,418 @@
+<!-- LANDING PAGE-->
+
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>CUCEI Virtual</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Mobland - Mobile App Landing Page Template">
+    <meta name="keywords" content="HTML5, bootstrap, mobile, app, landing, ios, android, responsive">
+
+    <!-- Font -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <!-- Themify Icons -->
+    <link rel="stylesheet" href="resources/css/themify-icons.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
+    <!-- Main css -->
+    <link href="resources/css/style.css" rel="stylesheet">
+</head>
+
+<body data-spy="scroll" data-target="#navbar" data-offset="30">
+
+    <!-- Nav Menu -->
+
+    <div class="nav-menu fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-dark navbar-expand-lg">
+                        <a class="navbar-brand" href="/"><img src="resources/images/logo.png" class="img-fluid" alt="logo"></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"> <a class="nav-link active" href="#home">Inicio <span class="sr-only">(current)</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="#features">Detalles</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="#gallery">Eventos</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="#contact">Contactos</a> </li>
+                                <% if (login) { %>                
+                                    <p>Usuario conectado: <strong><%= name %></p>       
+                                        <p>Servidor: <strong><%= room %></p>                   
+                                    <a href="/logout" class="a-logout">Salir</a>
+                                <%} else { %>
+                                    <li class="nav-item"><a href="login" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Regístrate / Iniciar sesión</a></li>
+                                <% } %>
+                                
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-gradient" id="home">
+        <script>
+			var server = '<%= room %>'
+			var nombre = '<%= name %>'
+			if(server==''){
+				server="global"
+			}
+			console.log(server + '  '+  nombre);
+		</script>
+        <div class="container mt-5">
+            <% if (login) { %>    
+                <!-- <a href="game" class="myButton">INICIAR </a>  -->
+                <div class="centered-form">
+                    <div class="centered-form__form">
+                      <form action="/select-room">
+                        <div class="form-field" style="display: none;">
+                          <input type="text" name="name" id="name_user">
+                          <input type="text" name = room id="name_room">
+                        </div>
+                        <script>
+                            document.getElementById('name_user').value='<%= name %>';
+                            document.getElementById('name_room').value='<%= room %>';
+                        </script>
+                        <div class="form-field">
+                          <button class="myButton">UNIRSE</button>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+
+                <a href="/sala" class="myButton">UNIRSE A EVENTO</a>
+            <%} else { %>
+                <a href="/game"  class="myButton">Jugar como invitado </a>
+                <script>
+                    var server = '<%= room %>'
+                    var nombre = '<%= name %>'
+			        console.log(server + '  '+  nombre);
+                </script>
+            <% } %>
+            <h1>Asiste a eventos en línea desde tu PC</h1>
+            <p class="tagline">Convive con docentes y estudiantes del centro universitario a través de nuestra plataforma. </p>
+        </div>
+        <div class="img-holder mt-3"><img src="resources/images/A ver.png" alt="phone" class="img-fluid"></div>
+    </header>   
+
+    <div class="section light-bg" id="features">
+
+
+        <div class="container">
+
+            <div class="section-title">
+                <h3>¿Qué puedes hacer aquí?</h3>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="card features">
+                        <div class="card-body">
+                            <div class="media">
+                                <span class="ti-comments gradient-fill ti-3x mr-3"></span>
+                                <div class="media-body">
+                                    <h4 class="card-title">Conéctate</h4>
+                                    <p class="card-text">Participa en eventos y reuniones con docentes e invitados..</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card features">
+                        <div class="card-body">
+                            <div class="media">
+                                <span class="ti-panel gradient-fill ti-3x mr-3"></span>
+                                <div class="media-body">
+                                    <h4 class="card-title">Vístete</h4>
+                                    <p class="card-text">Personaliza tu personaje.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card features">
+                        <div class="card-body">
+                            <div class="media">
+                                <span class="ti-bell gradient-fill ti-3x mr-3"></span>
+                                <div class="media-body">
+                                    <h4 class="card-title">Regístrate</h4>
+                                    <p class="card-text">Recibe notificaciones para que no te pierdas ningún evento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <!-- // end .section -->
+    <div class="section">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-6">
+                    <h2>Explora las áreas comunes del CUCEI</h2>
+                    <!-- <p class="mb-4">Participa con tu voz. </p> -->
+                </div>
+            </div>
+            <div class="perspective-phone">
+                <img src="resources/images/demo.png" alt="perspective phone" class="img-fluid">
+            </div>
+        </div>
+
+    </div>
+    <!-- // end .section -->
+
+
+    <div class="section light-bg">
+        <div class="container">
+            <div class="section-title">
+                <h3>Características principales</h3>
+            </div>
+
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#Goal">Objetivo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#schedule">Agendar eventos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#messages">Reglas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#livechat">Chat en tiempo real</a>
+                </li>
+            </ul>|
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="Goal">
+                    <div class="d-flex flex-column flex-lg-row">
+                        <img src="resources/images/Dispositivos.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <div>
+
+                            <h2>Conéctate desde cualquier dispositivo</h2>
+                            <p class="lead">Accede a tus reuniones desde la comodidad de tu dispositivo preferido</p>
+                            <p>El CUCEI Virtual estará al alcance de cualquier miembro activo de la comunidad. Solo debes registrarte. 
+                            </p>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="schedule">
+                    <div class="d-flex flex-column flex-lg-row">
+                        <div>
+                            <h2>Atiende reuniones</h2>
+                            <p class="lead">Las reuniones se podrán llevar a cabo en una versión 3D del CUCEI. </p>
+                            <p>Contacta a un docente o administrador para agendar reuniones de manera privada.
+                            </p>
+                        </div>
+                        <img src="resources/images/Agenda.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="messages">
+                    <div class="d-flex flex-column flex-lg-row">
+                        <img src="resources/images/Conducta.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <div>
+                            <h2>Participa de manera respetuosa.</h2>
+                            <p class="lead">Recuerda que hay una persona del otro lado de la pantalla. </p>            
+                            <p>Atiende las indicaciones de los admins.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="livechat">
+                    <div class="d-flex flex-column flex-lg-row">
+                        <div>
+                            <h2>Chat de voz y texto</h2>
+                            <p class="lead">No es de a fuerzas participar. </p>
+                            <p>Comienza a escribir o abre tu micrófono para comunicarte con otros participantes.
+                            </p>
+                        </div>
+                        <img src="resources/images/Chat.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- // end .section -->
+
+    <div class="section">
+        <div class="container">
+            <div class="section-title">                
+                <h3>Integrantes del equipo</h3>
+            </div>
+
+            <div class="testimonials owl-carousel">                
+                <div class="testimonials-single">
+                    <img src="resources/images/Isaac.png" alt="client" class="client-img">
+                    <!-- <blockquote class="blockquote">"MUDAMUDAMUDAMUDAMUDA"</blockquote> -->
+                    <h5 class="mt-4 mb-2">Javier Isaac Hernández Mora</h5>
+                    <p class="text-primary">Desarrollo de assets 3D</p>
+                </div>
+                <div class="testimonials-single">
+                    <img src="resources/images/Ignacio.png" alt="client" class="client-img">
+                    <!-- <blockquote class="blockquote">"Eso es to-eso es to. Eso es todo amigos."</blockquote> -->
+                    <h5 class="mt-4 mb-2">Jaime Ignacio Sandoval García</h5>
+                    <p class="text-primary">Desarrollo de la IA</p>
+                </div>
+                <div class="testimonials-single">
+                    <img src="resources/images/Victor.png" alt="client" class="client-img">
+<!--                    <blockquote class="blockquote">"-Me parecen muy fáciles los examenes de algoritima. -¡Hola maestra!"</blockquote> -->
+                    <h5 class="mt-4 mb-2">Víctor Ernesto Zamora Barbosa</h5>
+                    <p class="text-primary">Desarrollo web</p>
+                </div>
+                <div class="testimonials-single">
+                    <img src="resources/images/Profe.jpg" alt="client" class="client-img">
+                    <h5 class="mt-4 mb-2">José Luis David Bonilla Carranza</h5>
+                    <p class="text-primary">Asesor del proyecto</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- // end .section -->
+
+
+    <div class="section light-bg" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h3>Aquí van capturas de los eventos.</h3>
+            </div>
+
+            <div class="img-gallery owl-carousel owl-theme">
+                <img src="resources/images/Pantalla1.png" alt="image">
+                <img src="resources/images/otras.png" alt="image">
+                <img src="resources/images/otras.png" alt="image">
+                <img src="resources/images/otras.png" alt="image">
+            </div>
+
+        </div>
+
+    </div>
+    <!-- // end .section -->
+
+
+
+
+
+ 
+
+
+        </div>
+
+    </div>
+    <!-- // end .section -->
+
+
+    <div class="section pt-0">
+        <div class="container">
+            <div class="section-title">
+                <small>FAQ</small>
+                <h3>PREGUNTAS FRECUENTES</h3>
+            </div>
+
+            <div class="row pt-4">
+                <div class="col-md-6">
+                    <h4 class="mb-3">¿Puedo participar si no soy estudiante?</h4>
+                    <p class="light-font mb-5">Supongo que sí ¿No?</p>
+                    <h4 class="mb-3">¿Cuál es su objetivo?</h4>
+                    <p class="light-font mb-5">Crear eventos virtuales en nuestro centro universitario.</p>
+
+                </div>
+                <div class="col-md-6">
+                    <h4 class="mb-3">¿Cómo puedo contactarlos?</h4>
+                    <p class="light-font mb-5">Si todo sale bien, claro.</p>
+                    <h4 class="mb-3">¿Qué más??</h4>
+                    <p class="light-font mb-5">Necesito más ideas.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- // end .section -->
+
+    <div class="light-bg py-5" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left">
+                    <div class=" d-block d-sm-inline-block">
+                        <p class="mb-2">
+                            <span class="ti-user mr-2"></span> <a>Javier Isaac Hernández Mora</a>
+                        </p>
+                        <p class="mb-2">                            
+                            <span class="ti-email mr-2"></span> <a class="mr-4" href="mailto:support@mobileapp.com">javier.hernandez5094@alumnos.udg.mx</a>                            
+                        </p>
+                    </div>
+                    <div class=" d-block d-sm-inline-block">
+                        <p class="mb-2">
+                            <span class="ti-user mr-2"></span> <a>Jaime Ignacio Sandoval García</a>                                                        
+                        </p>
+                        <p>
+                            <span class="ti-email mr-2"></span> <a class="mr-4" href="mailto:support@mobileapp.com">jaime.sandoval4112@alumnos.udg.mx</a>                            
+                        </p>
+                    </div>
+                    <div class=" d-block d-sm-inline-block">
+                        <p class="mb-2">
+                            <span class="ti-user mr-2"></span> <a>Víctor Ernesto Zamora Barbosa</a>                         
+                        </p>
+                        <p class="mb-2">
+                            <span class="ti-email mr-2"></span> <a class="mr-4" href="mailto:support@mobileapp.com">victor.zamora1267@alumnos.udg.mx</a>                            
+                        </p>
+                    </div>
+                    <div class="d-block d-sm-inline-block">
+                        <p class="mb-0">
+                            
+                        </p>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <!-- <div class="social-icons">
+                        <a href="#"><span class="ti-facebook"></span></a>
+                        <a href="#"><span class="ti-twitter-alt"></span></a>
+                        <a href="#"><span class="ti-instagram"></span></a>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- // end .section -->
+    <!-- <footer class="my-5 text-center">
+        <p class="mb-2"><small>Aquí van los derechos. <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">YouTube</a></small></p>
+
+        <small>
+            <a href="#" class="m-2">Qué onda</a>
+            <a href="#" class="m-2">Qué pez</a>
+            <a href="#" class="m-2">Qué 11</a>
+        </small>
+    </footer> -->
+
+    <!-- jQuery and Bootstrap -->
+    <script src="resources/js/jquery-3.2.1.min.js"></script>
+    <script src="resources/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugins JS -->
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <!-- Custom JS -->
+    <script src="resources/js/script.js"></script>
+    
+
+</body>
+</html>

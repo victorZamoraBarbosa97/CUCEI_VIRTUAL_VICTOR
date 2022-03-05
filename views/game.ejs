@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>CUCEI VIRTUAL </title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="Cucei Vicrtual es un juego online. Usala libreria  Three.js y
+		 Socket.io. autores :Victor Ernesto Zamora Barbosa 2022 categoria: aplicacion-javascript" />
+		<meta property="og:title" content="Cucei Virtual" />
+		<meta property="og:description" content="Cucei Vicrtual es un juego online. Usa la libreria  Three.js y
+		Socket.io. authors:Victor Ernesto Zamora Barbosa 2022 categoria: aplicacion-javascript" />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1265" />
+		<meta property="og:image:height" content="817" />
+		<meta property="og:image:alt" content="Cucei Virtual" />
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="https://www.google.com/jsapi"></script>
+
+		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Kavivanar" rel="stylesheet">
+		<link href="resources/css/style-chat.css" rel="stylesheet">
+
+	</head>
+	<body id="body">
+		<!-- ENVIO DE DATOS DE SESSION -->
+
+		<script>
+			var server = '<%= room %>';
+			var nombre = '<%= name %>';
+			var loginn = '<%= login %>';
+			console.log(server + '  '+  nombre + ' ' + loginn);
+		</script>
+
+		<div class="centered-form" style="display: none;">
+			<div class="centered-form__form">
+			  <form action="/select-room">
+				<div class="form-field">
+				  <input type="text" name="name"  id="name_user">
+				</div>
+				<div class="form-field">
+				  <input type="text" name="room" id="room_user">
+				</div>
+				<script>
+					document.getElementById('name_user').value ='<%= name %>';
+					document.getElementById('room_user').value ='<%= room %>';
+				</script>
+				<div class="form-field">
+				  <button id="btn_user">UNIRSE</button>
+				</div>
+			  </form>
+			</div>
+		</div>
+
+
+
+		<!-- ICONOS -->
+		<div id= "iconos">
+			<audio src="resources/music/ambiente.mp3"> </audio>
+			<button type= "button" id="boton"> 
+				<img src="resources/images/volumen.png" id="imgAudio" alt="btn-audio" width="35px" height="35px">
+			</button>
+			<button type= "button" id="botonChat"> 
+				<img src="resources/images/charla.png" id="imgchat" alt="btn-chat" width="35px" height="35px">
+			</button>
+			<a type= "button" id="botonMap" class="botonMap"> 
+				<img src="resources/images/mapa.png" id="imgMap" alt="btn-Map" width="35px" height="35px">
+			</a>
+			<button type= "button" id="botonInvent"> 
+				<img src="resources/images/backpack.png" id="imgInv" alt="btn-inv" width="35px" height="35px">
+			</button>
+
+			<script>
+				var v = document.getElementsByTagName("audio")[0];
+				var sonido = false;
+				var chatDisplay = true;			
+				var botonAudio = document.getElementById("boton");
+				var botonChat = document.getElementById("botonChat");
+
+				botonAudio.addEventListener("click",function(){
+					if (!sonido){
+						v.play();
+						document.getElementById("imgAudio").src = "resources/images/volumen.png"
+						sonido = true;
+					} else{
+						v.pause();
+						document.getElementById("imgAudio").src = "resources/images/mudo.png"
+						sonido = false;
+					}
+				})
+
+				botonChat.addEventListener("click",function(){
+					if(chatDisplay){
+						document.getElementById("imgchat").src = "resources/images/charla_none.png"
+						document.getElementById("app").style.display = "none";
+						chatDisplay = false;
+					}else{
+						document.getElementById("imgchat").src = "resources/images/charla.png"
+						document.getElementById("app").style.display = "flex";
+						chatDisplay = true;
+					}
+				})
+
+				// SCRIPT  MOSTRAR/ OCULTAR MINI MAPA 
+				$(window).load(function () {
+					$(".botonMap").click(function(){
+						$('.Div_mapa').show();
+						// $('.Div_mapa').load("./mapaQCI.html");
+					});
+					$(".botonInvent").click(function(){
+						$('.Div_inv').show();
+					})
+					// $('.Div_mapa').click(function(){
+					//     $('.Div_mapa').hide();
+					// });
+					$('.Cerrar_btn_map').click(function(){
+						$('.Div_mapa').hide();
+						$('.Div_inv').hide();
+					});
+				});
+
+			</script>
+			<!-- DIV OCULTO DE MAPA  -->
+			<div class="Div_mapa">
+				<span class="helper"></span>
+				<div>
+					<div class="Cerrar_btn_map">&times;</div>
+					<!-- <iframe src="resources/../mapaQCI.html" frameborder="0"></iframe> -->
+					<!-- <link class="MAPA" href="/game" rel="import" /> -->
+					<p> Aqui va el mapa</p>
+					<!-- <img src="" style="width:40%; height: 40%;" > -->
+				</div>
+			</div>
+
+			<!-- DIV OCULTO DE INVENTARIO  -->
+			<div class="Div_inv">
+				<span class="helper"></span>
+				<div>
+					<!-- <div class="Cerrar_btn_map">&times;</div> -->
+					<!-- <iframe src="resources/../mapaQCI.html" frameborder="0"></iframe> -->
+					<!-- <link class="MAPA" href="/game" rel="import" /> -->
+					<!-- <p>Add any HTML content<br />inside the popup box!</p> -->
+					<!-- <img src="" style="width:40%; height: 40%;" > -->
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="message">
+			<p id="message_text"></p>
+			<button id="message_ok">OK</button>
+		</div>
+
+
+
+						<!-- CHAT GLOBAL -->
+		<% if (login) { %>
+			<div id="app" class="chat" style="max-width: 300px; margin-left: auto;">
+			
+				<section class="chat__main">
+					<ol class="chat__messages">
+						<message-template v-for="msg in messages" :msg="msg" :key="msg.createAt"></message-template>
+					</ol>
+					<footer class="chat__footer">
+						<form @submit.prevent="sendMessage">
+							<input type="text" placeholder="Mensaje" required v-model="message" autofocus autocomplete="off" />
+							<button type="submit">Enviar</button>
+						</form>
+					</footer>
+				</section>
+			
+			</div>
+		<%} else { %>
+			<script>
+				document.getElementById("botonChat").style.display = "none";
+			</script>
+			 <% } %>
+
+
+		
+		<!-- CHAT IN-GAME  -->
+		<div id="chat-in-game">
+			<form id="msg-form" action="">
+      			<input id="m" autocomplete="off" /><button>Enviar</button>
+    		</form>
+		</div>
+
+		<script>
+			var game;
+			document.addEventListener("DOMContentLoaded", function(){ game = new Game(); });
+		</script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/92/three.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+		<script src="/socket.io/socket.io.js"></script> 
+		<script src= "resources/js/inflate.min.js"></script>
+		<script src="resources/js/FBXLoader.js"></script>
+		<script src="resources/js/Detector.js"></script>
+		<script src="resources/js/toon3d.js"></script>
+		<script src="resources/js/game.js"></script>
+		<script src="resources/js/simplePeer.js"></script>
+		<script src="resources/js/datefns.js"></script>
+		<script type="module" src="resources/js/chat.js"> </script>
+
+		<script src="resources/js/"></script>
+
+	</body>
+</html>
+
+
